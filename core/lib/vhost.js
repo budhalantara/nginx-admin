@@ -105,5 +105,10 @@ module.exports = {
       childProcess.execSync(`sudo chown $USER:$USER '${publicHtmlPath}'`)
       fs.writeFileSync(path.resolve(publicHtmlPath, 'index.html'), initHTML(domain))
     }
+
+    const nginxTest = childProcess.execSync('sudo nginx -t').toString()
+    if (nginxTest.indexOf('test is successful') > -1) {
+      childProcess.execSync('sudo nginx -s reload')
+    }
   }
 }
