@@ -1,0 +1,14 @@
+/node_modules/
+
+simulate/public_html/*
+simulate/sites-available/*
+simulate/sites-enabled/*
+simulate/ssl/*
+
+!simulate/public_html/.gitkeep
+!simulate/sites-available/.gitkeep
+!simulate/sites-enabled/.gitkeep
+!simulate/ssl/.gitkeep
+
+.env
+config.json
