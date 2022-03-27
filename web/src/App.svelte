@@ -4,38 +4,18 @@
   import Home from './pages/Home.svelte'
   import Config from './pages/Config.svelte'
   import SSL from './pages/SSL.svelte'
-
-	// const routes = [
-	// 	{
-	// 		name: 'home',
-	// 		path: '/',
-	// 		component: Home,
-	// 		isMenu: true
-	// 	},
-	// 	{
-	// 		name: 'ssl',
-	// 		path: '/ssl',
-	// 		component: SSL,
-	// 		isMenu: true
-	// 	},
-	// 	{
-	// 		name: 'ssl',
-	// 		path: '/ssl/:name',
-	// 		component: SSL
-	// 	},
-	// 	{
-	// 		name: 'config',
-	// 		path: '/config',
-	// 		component: Config,
-	// 		isMenu: true
-	// 	}
-	// ]
+  import Sites from './pages/Sites.svelte'
 
 	const routes = [
 		{
 			name: 'home',
 			path: '/',
 			component: Home
+		},
+		{
+			name: 'sites',
+			path: '/sites',
+			component: Sites
 		},
 		{
 			name: 'ssl',
