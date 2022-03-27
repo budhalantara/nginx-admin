@@ -28,8 +28,13 @@
   }
 
   async function fetchData() {
-    const req = await request('/api/ssl')
-    SSLs = req.data
+    const res = await request('/api/ssl')
+    if (!res.success) {
+      response = res
+      return
+    }
+    
+    SSLs = res.data
   }
 
   async function getDetail() {
@@ -97,3 +102,5 @@
     value={sslDetail.key?.content}
   />
 {/if}
+
+<Response {response}/>

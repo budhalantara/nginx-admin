@@ -28,6 +28,7 @@
 		const res = await request('/api/config')
 		if (!res.success) {
 			response = res
+			return
 		}
 		nginxSitesAvailablePath = res.data.nginxSitesAvailablePath || ''
 		nginxSitesEnabledPath = res.data.nginxSitesEnabledPath || ''
