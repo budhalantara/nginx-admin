@@ -21,13 +21,14 @@ function initHTML(domain) {
 function reload() {
   childProcess.exec('sudo nginx -t', (err, stdout, stderr) => {
     if (err) {
-      throw err
+      console.log(err)
+      return
     }
     const res = stdout || stderr
     if (res.indexOf('test is successful') > -1) {
       childProcess.exec('sudo nginx -s reload', (err, stdout, stderr) => {
         if (err) {
-          throw err
+          console.log(err)
         }
       })
     }
