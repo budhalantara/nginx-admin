@@ -22,6 +22,9 @@
       certificate,
       privateKey
     })
+    if (response.success) {
+      window.location.reload()
+    }
   }
 
   async function fetchData() {
@@ -67,8 +70,18 @@
     bind:value={privateKey}
   />
   <br>
-  <button on:click={create}>Create</button>
-  <Response {response}/>
+  <button
+    style="width: 100px"
+    on:click={create}
+  >
+    Save
+  </button>
+  <button
+    style="width: 100px"
+    on:click={() => window.location.reload()}
+  >
+    Cancel
+  </button>
 {:else if params?.name}
   <h3 style="margin-bottom: 12px">
     ssl: {params.name}
