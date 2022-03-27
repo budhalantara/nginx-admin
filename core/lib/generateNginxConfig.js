@@ -4,7 +4,7 @@
 function httpSection() {
     return `
     listen 80;
-    listen [::]:80`
+    listen [::]:80;`
 }
 
 function sslSection(sslCertPath, sslKeyPath) {

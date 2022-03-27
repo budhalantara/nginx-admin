@@ -39,6 +39,23 @@ router.put('/api/config', (ctx) => {
   }
 })
 
+router.get('/api/vhost', (ctx) => {
+  try {
+    const data = vhost.list()
+    ctx.body = {
+      success: true,
+      data
+    }
+  } catch (error) {
+    console.log(error)
+    ctx.body = {
+      success: false,
+      message: error.message
+    }
+    return
+  }
+})
+
 router.post('/api/vhost', (ctx) => {
   try {
     config.validate()
@@ -46,6 +63,24 @@ router.post('/api/vhost', (ctx) => {
     ctx.body = {
       success: true,
       message: 'new vhost created'
+    }
+  } catch (error) {
+    console.log(error)
+    ctx.body = {
+      success: false,
+      message: error.message
+    }
+    return
+  }
+})
+
+router.put('/api/vhost/:name', (ctx) => {
+  try {
+    const { enabled } = ctx.request.body
+    vhost.update(ctx.params.name, { enabled })
+    ctx.body = {
+      success: true,
+      message: 'vhost updated'
     }
   } catch (error) {
     console.log(error)

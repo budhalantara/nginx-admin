@@ -22,11 +22,19 @@
       certificate,
       privateKey
     })
+    if (response.success) {
+      window.location.reload()
+    }
   }
 
   async function fetchData() {
-    const req = await request('/api/ssl')
-    SSLs = req.data
+    const res = await request('/api/ssl')
+    if (!res.success) {
+      response = res
+      return
+    }
+    
+    SSLs = res.data
   }
 
   async function getDetail() {
@@ -67,8 +75,18 @@
     bind:value={privateKey}
   />
   <br>
-  <button on:click={create}>Create</button>
-  <Response {response}/>
+  <button
+    style="width: 100px"
+    on:click={create}
+  >
+    Save
+  </button>
+  <button
+    style="width: 100px"
+    on:click={() => window.location.reload()}
+  >
+    Cancel
+  </button>
 {:else if params?.name}
   <h3 style="margin-bottom: 12px">
     ssl: {params.name}
@@ -84,3 +102,5 @@
     value={sslDetail.key?.content}
   />
 {/if}
+
+<Response {response}/>

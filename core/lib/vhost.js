@@ -18,7 +18,41 @@ function initHTML(domain) {
 </html>`.trim()
 }
 
+function reload() {
+  childProcess.exec('sudo nginx -t', (err, stdout, stderr) => {
+    if (err) {
+      console.log(err)
+      return
+    }
+    const res = stdout || stderr
+    if (res.indexOf('test is successful') > -1) {
+      childProcess.exec('sudo nginx -s reload', (err, stdout, stderr) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+    }
+  })
+}
+
 module.exports = {
+  list: () => {
+    const {
+      nginxSitesAvailablePath,
+      nginxSitesEnabledPath
+    } = config.load()
+    const ls = fs.readdirSync(nginxSitesAvailablePath)
+      .filter(x => !x.startsWith('.'))
+
+    return ls.map(x => {
+      const exist = fs.existsSync(path.resolve(nginxSitesEnabledPath, x))
+      return {
+        name: x,
+        enabled: exist
+      }
+    })
+  },
+
   new: (opts) => {
     const {
       nginxSitesAvailablePath,
@@ -104,6 +138,27 @@ module.exports = {
       childProcess.execSync(`sudo mkdir '${publicHtmlPath}'`)
       childProcess.execSync(`sudo chown $USER:$USER '${publicHtmlPath}'`)
       fs.writeFileSync(path.resolve(publicHtmlPath, 'index.html'), initHTML(domain))
+    }
+
+    reload()
+  },
+
+  update: (name, opts) => {
+    const {
+      nginxSitesAvailablePath,
+      nginxSitesEnabledPath
+    } = config.load()
+
+    const confAvailablePath = path.resolve(nginxSitesAvailablePath, name)
+    const confEnabledPath = path.resolve(nginxSitesEnabledPath, name)
+
+    const userPassword = config.env.userPassword
+    if (opts.enabled === true && fs.existsSync(confAvailablePath) && !fs.existsSync(confEnabledPath)) {
+      childProcess.execSync(`${userPassword ? `echo '${userPassword}' | sudo -S` : 'sudo'} ln -s '${confAvailablePath}' '${confEnabledPath}'`)
+      reload()
+    } else if (opts.enabled === false) {
+      childProcess.execSync(`${userPassword ? `echo '${userPassword}' | sudo -S` : 'sudo'} rm -f '${confEnabledPath}'`)
+      reload()
     }
   }
 }

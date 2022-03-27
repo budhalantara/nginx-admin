@@ -25,7 +25,7 @@ function getPort(cb) {
   server.on('listening', () => {
     const newPort = server.address().port
     server.close()
-    if (newPort !== port) {
+    if (newPort != port) {
       console.log(`Port ${port} is taken, using ${newPort} instead\n`)
     }
     cb(newPort)

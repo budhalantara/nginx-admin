@@ -43,6 +43,17 @@
 			request('/api/ssl'),
 			request('/api/config')
 		])
+
+		if (!ssl.success) {
+			response = ssl
+			return
+		}
+
+		if (!config.success) {
+			response = config
+			return
+		}
+
 		certs = ssl.data
 		publicHTMLBasePath = config.data.nginxPublicHTMLBasePath
 	}
