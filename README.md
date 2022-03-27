@@ -11,7 +11,10 @@ cd ../web
 npm i
 ```
 
-Start service
+Copy core/.env.example to core/.env\
+Set USER_PASSWORD env on core/.env
+
+Then start service
 ```bash
 npm start
 ```
