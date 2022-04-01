@@ -17,11 +17,7 @@ function serve() {
 	return {
 		writeBundle() {
 			if (server) return;
-			// server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
-			// 	stdio: ['ignore', 'inherit', 'inherit'],
-			// 	shell: true
-			// });
-			server = require('child_process').spawn('nodemon', ['api', '-w api', '-w ../core/lib'], {
+			server = require('child_process').spawn('nodemon', ['web/api', '-w web/api', '-w lib'], {
 				stdio: ['ignore', 'inherit', 'inherit'],
 				shell: true
 			});
@@ -33,12 +29,12 @@ function serve() {
 }
 
 export default {
-	input: 'src/main.js',
+	input: 'web/src/main.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'web/public/build/bundle.js'
 	},
 	plugins: [
 		svelte({

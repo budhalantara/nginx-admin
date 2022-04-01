@@ -1,0 +1,41 @@
+{
+  "name": "nginx-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "nginx admin",
+  "author": "budhalantara",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "NODE_ENV=production node index"
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "command-line-args": "^5.2.1",
+    "dotenv": "^16.0.0",
+    "inquirer": "^8.2.2",
+    "is-valid-domain": "^0.1.6",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-static": "^5.0.0",
+    "ssl-validator": "^1.0.7"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "nodemon": "^2.0.15",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-spa-router": "^3.2.0"
+  }
+}

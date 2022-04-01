@@ -1,5 +1,13 @@
 const inquirer = require('inquirer')
 const vhost = require('../lib/vhost')
+const config = require('../lib/config')
+const error = require('../lib/error')
+
+try {
+  config.validate()
+} catch ({ message }) {
+  error(message)
+}
 
 const questions = [
   {
