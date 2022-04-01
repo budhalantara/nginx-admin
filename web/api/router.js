@@ -1,8 +1,8 @@
 const Router = require('@koa/router')
 const router = new Router()
-const config = require('../../core/lib/config')
-const vhost = require('../../core/lib/vhost')
-const ssl = require('../../core/lib/ssl')
+const config = require('../../lib/config')
+const vhost = require('../../lib/vhost')
+const ssl = require('../../lib/ssl')
 
 router.get('/api/config', (ctx) => {
   try {
